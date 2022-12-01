@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/persome/mern-tutorial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/persome/mern-tutorial/issues"
+  },
+  "homepage": "https://github.com/persome/mern-tutorial#readme"
 }
