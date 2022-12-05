@@ -12,6 +12,9 @@ const getGoals = asyncHandler(async (req, res) => {
     res.status(200).json(goals);
 })
 
+
+
+
 // @desc Set goals
 // @route POST /api/goals
 // @ access Private
@@ -30,6 +33,9 @@ const setGoals = asyncHandler(async (req, res) => {
     }
 
 })
+
+
+
 
 // @desc Update goals
 // @route PUT /api/goals/:id
@@ -50,6 +56,9 @@ const updateGoals = asyncHandler(async (req, res) => {
     }
 })
 
+
+
+
 // @desc Delete goals
 // @route DELETE /api/goals/:id
 // @ access Private
@@ -67,6 +76,8 @@ const deleteGoals = asyncHandler(async (req, res) => {
         throw new Error('Goal not found')
     }
 })
+
+
 
 module.exports = {
     getGoals,
