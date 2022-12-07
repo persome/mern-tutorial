@@ -1,13 +1,14 @@
 const asyncHandler = require('express-async-handler')
 
 const Goal = require('../models/goalModel')
+const user = require('../models/userModels')
 
 // @desc Get goals
 // @route GET /api/goals
 // @ access Private
 // when we use mongoose to interact with the database we get a promise, so we use async await. we need to install an npm package called express-async-handler
 const getGoals = asyncHandler(async (req, res) => {
-    const goals = await Goal.find()
+    const goals = await Goal.find({ user: req.user.id })
 
     res.status(200).json(goals);
 })
@@ -21,6 +22,7 @@ const getGoals = asyncHandler(async (req, res) => {
 const setGoals = asyncHandler(async (req, res) => {
     const goal = await Goal.create({
         text: req.body.text,
+        user:req.user.id,
     })
 
     res.status(200).json(goal);
@@ -43,6 +45,21 @@ const setGoals = asyncHandler(async (req, res) => {
 const updateGoals = asyncHandler(async (req, res) => {
     // Gets the goal
     const goal = await Goal.findById(req.params.id)
+
+    const user = await User.findbyId(req.user.id)
+
+    // Check for user
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Make sure the logged user matches the goal user
+    if (goal.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
     // Updates the goal
     const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -67,7 +84,21 @@ const deleteGoals = asyncHandler(async (req, res) => {
     const goal = await Goal.findById(req.params.id)
     // Removes the goal
     await goal.remove()
+    
+    const user = await User.findbyId(req.user.id)
 
+    // Check for user
+    if (!user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Make sure the logged user matches the goal user
+    if (goal.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+    
     res.status(200).json({ id: req.params.id });
 
 
