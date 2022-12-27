@@ -29,9 +29,10 @@ function Register() {
             toast.error(message)
         }
 
-        // ? When '||' is replaced with '&&' on the condition below, thw plage loads and  routes back to the dashboard page which is the root. When using '&&' refistration data is created but the page doesn't go back to the root.
+        // ? When '||' is replaced with '&&' on the condition below, the plage loads and  routes back to the dashboard page which is the root. When using '&&' refistration data is created but the page doesn't go back to the root.
         // TODO: Find a way to make the submit button route to the root directory after creating a user.
-        // ^ Tested with `<Link to='/'></Link>` from 'react-router-dom'
+        // ^ Tested with `<Link to='/'></Link>` from 'react-router-dom' . Didn't submit data,  but loaded the homepage
+        // ^ Tested with '||' . Didn't work
         // * if (isSuccess || user) {
         // *     navigate('/')
         // * }
