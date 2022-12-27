@@ -24,18 +24,27 @@ function Register() {
         (state) => state.auth
     )
 
-    useEffect(()=>{
-        if(isError){
+    useEffect(() => {
+        if (isError) {
             toast.error(message)
         }
 
-        if(isSuccess || user){
+        // ? When '||' is replaced with '&&' on the condition below, thw plage loads and  routes back to the dashboard page which is the root. When using '&&' refistration data is created but the page doesn't go back to the root.
+        // TODO: Find a way to make the submit button route to the root directory after creating a user.
+        // ^ Tested with `<Link to='/'></Link>` from 'react-router-dom'
+        // * if (isSuccess || user) {
+        // *     navigate('/')
+        // * }
+
+        if (isSuccess && user) {
             navigate('/')
         }
 
         dispatch(reset())
-        
-    },[user,isError,isSuccess,message,navigate,dispatch])
+
+    },
+        [user, isError, isSuccess, message, navigate, dispatch]
+    )
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -60,7 +69,7 @@ function Register() {
         }
     }
 
-    if(isLoading){
+    if (isLoading) {
         return <Spinner />
     }
 
@@ -120,7 +129,9 @@ function Register() {
                         />
                     </div>
                     <div className="form-group">
-                        <button type='submit' className='btn btn-block'>Submit</button>
+                        <button type='submit' className='btn btn-block'>
+                            Submit
+                        </button>
                     </div>
                 </form>
             </section>
