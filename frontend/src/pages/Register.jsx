@@ -1,9 +1,10 @@
-import { React, useState, useEffect } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { FaUser } from 'react-icons/fa'
-import { register, reset } from '../features/auth/authSlice'
+import { register, reset } from '../features/auth/AuthSlice'
 import Spinner from '../elements/Spinner'
 
 
@@ -37,8 +38,8 @@ function Register() {
         // *     navigate('/')
         // * }
 
-        if (isSuccess && user) {
-            navigate('/')
+        if (isSuccess || user) {
+            navigate("/")
         }
 
         dispatch(reset())
@@ -46,6 +47,7 @@ function Register() {
     },
         [user, isError, isSuccess, message, navigate, dispatch]
     )
+
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -68,6 +70,8 @@ function Register() {
 
             dispatch(register(userData))
         }
+
+
     }
 
     if (isLoading) {
