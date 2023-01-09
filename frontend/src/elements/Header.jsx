@@ -8,7 +8,7 @@ function Header() {
     // const { state } = useLocation();
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const { user } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.auth)
 
     // const { from = "/" } = state || {};
 
@@ -18,6 +18,7 @@ function Header() {
         navigate('/')
     }
 
+    
     return (
         <header className='header'>
             <div className="Logo">
@@ -26,7 +27,7 @@ function Header() {
                 </Link>
             </div>
             <ul>
-                {/* {user ? (
+                {user ? (
                     <li>
                         <button className='btn' onClick={onLogout}>
                             <FaSignOutAlt /> Logout
@@ -46,8 +47,8 @@ function Header() {
                         </li>
                     </>
                 )
-                } */}
-                <li>
+                }
+                {/* <li>
                     <Link to='/login'>
                         <FaSignInAlt /> Login
                     </Link>
@@ -56,7 +57,7 @@ function Header() {
                     <Link to='/register'>
                         <FaUser /> Register
                     </Link>
-                </li>
+                </li> */}
             </ul >
         </header >
     )
